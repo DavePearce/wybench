@@ -5,18 +5,15 @@ import std::filesystem
 
 import wybench::parser
 
-property sorted(int[] xs, int start, int end) 
-where start >= end || all { i in start .. (end-1) | xs[i] <= xs[i+1] }
-
-type sortedList is (int[] xs) where sorted(xs,0,|xs|)
+type sortedList is (int[] xs) 
+where |xs| <= 1 || all { i in 0 .. |xs|-1 | xs[i] <= xs[i+1] }
 
 /**
  * Sort a given list of items into ascending order, producing a sorted
  * list.
  */
-function sort(int[] items, int start, int end) -> (int[] rs)
-requires 0 <= start && start <= end && end <= |items|
-ensures sorted(rs,start,end):
+function sort(int[] items, int start, int end) -> sortedList
+requires 0 <= start && start <= end && end <= |items|:
     //
     if (start+1) < end:
         int pivot = (end + start) / 2
