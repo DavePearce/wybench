@@ -60,7 +60,9 @@ requires m.doorOpen:
 function doorOpened(Microwave m) -> Microwave
 requires !m.doorOpen:
         //
-        return { doorOpen: true, heatOn: false, timer: m.timer }
+        m.doorOpen = true
+        m.heatOn = false
+        return m
 
 
     
