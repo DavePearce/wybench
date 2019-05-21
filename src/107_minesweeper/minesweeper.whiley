@@ -26,8 +26,7 @@ type HiddenSquare is {
 public type Square is ExposedSquare | HiddenSquare
 
 // ExposedSquare constructor
-export function ExposedSquare(nat rank, bool bomb) -> ExposedSquare
-requires rank <= 8:
+export function ExposedSquare(int rank, bool bomb) -> ExposedSquare:
     return { rank: rank, holdsBomb: bomb }
 
 // HiddenSquare constructor
