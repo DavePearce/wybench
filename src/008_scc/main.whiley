@@ -111,7 +111,7 @@ function State(Digraph g) -> State:
 function find_components(Digraph g) -> int[][]:
     State state = State(g)
     
-    nat i = 0
+    int i = 0
     while i < |g|:
         if !state.visited[i]:
             state = visit(i,state)
@@ -128,7 +128,7 @@ function find_components(Digraph g) -> int[][]:
     //
     return components
 
-function visit(nat v, State s) -> State
+function visit(int v, State s) -> State
 requires v < |s.graph|:
     bool root = true
     s.visited[v] = true
@@ -138,7 +138,7 @@ requires v < |s.graph|:
     // process edges
     int i = 0
     while i < |s.graph[v]|:
-        nat w = s.graph[v][i]
+        int w = s.graph[v][i]
         if !s.visited[w]:
             s = visit(w,s)
         if !s.inComponent[w] && s.rindex[w] < s.rindex[v]:
