@@ -75,7 +75,7 @@ method lookFor(sortedList list, int item):
         io::print("NOT FOUND: ")
         io::print(item)
         io::print(" in ")
-        io::print(ascii::to_string(list))
+        io::print(list)
 
 int[] searchTerms = [1,2,3,4,5,6,7,8,9]
 
