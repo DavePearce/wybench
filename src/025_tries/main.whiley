@@ -84,7 +84,7 @@ requires state < trie.size && index <= |str|:
                 return add(trie,t.to,str,index+1)
             i = i + 1
         // No existing transition, so make a new one.
-        nat target = trie.size
+        int target = trie.size
         Transition t = { from: state, to: target, character: c }
         trie = add(trie,t)
         //
@@ -93,24 +93,20 @@ requires state < trie.size && index <= |str|:
 // Add a new transition to the trie.  This function should be
 // deprecate when it becomes easier to reuse one of the existing Array
 // functions.
-function add(Trie trie, Transition transition) -> (Trie r)
-// One more transition added
-ensures |r.transitions| == |trie.transitions| + 1
-// Everything is unchanged upto the new transition
-ensures array::equals(trie.transitions,r.transitions,0,|trie.transitions|)
-// New transition correctly added
-ensures r.transitions[|trie.transitions|] == transition
-// Size greater than new transition nodes
-ensures r.size > transition.from && r.size > transition.to
-// Size can only increase
-ensures r.size >= trie.size:
-    // append new transition
-    Transition[] rs = array::append(trie.transitions,transition)
+function add(Trie trie, Transition transition) -> Trie:
+    Transition[] r = [EmptyTransition; |trie.transitions|+1]
+    // copy over all existing ts
+    int i = 0
+    while i < |trie.transitions|:
+        r[i] = trie.transitions[i]
+        i = i + 1
+    // add in the new transition
+    r[i] = transition
     // compute updated size
-    int max = math::max(trie.size,transition.from+1)
-    max = math::max(max,transition.to+1)
+    int max = math::max(trie.size,transition.from)
+    max = math::max(max,transition.to)
     // done
-    return { size: max, transitions: rs }
+    return { size: max, transitions: r }
 
 // Check whether a given string is contained in the trie, 
 // starting from the root state.
