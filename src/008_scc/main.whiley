@@ -87,15 +87,13 @@ type State is {
     bool[] visited,
     bool[] inComponent,
     int[] rindex,
-    Vector<nat> stack,
+    Vector<int> stack,
     int index,
     int cindex
 }
 where |visited| == |graph|
 where |inComponent| == |graph|
 where |rindex| == |graph|
-// Every vertex on stack must be valid
-where all { k in 0..stack.length | stack.items[k] < |graph| }
 
 function State(Digraph g) -> State:
     return {
@@ -162,9 +160,6 @@ requires v < |s.graph|:
     return s
 
 method main(ascii::string[] args):
-    if |args| == 0:
-        io::println("usage: average <file>")
-    else:
         filesystem::File file = filesystem::open(args[0],filesystem::READONLY)
         ascii::string input = ascii::from_bytes(file.read_all())
         int[][]|null data = parser::parseIntLines(input)
