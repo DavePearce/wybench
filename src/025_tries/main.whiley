@@ -115,9 +115,7 @@ function contains(Trie trie, ascii::string str) -> bool:
 
 // Check whether a given string is contained in the trie, 
 // starting from a given state.
-function contains(Trie trie, int state, ascii::string str, nat index) -> bool
-requires index <= |str|
-requires state >= 0:
+function contains(Trie trie, int state, ascii::string str, nat index) -> bool:
     //
     if index == |str|:
         return true
