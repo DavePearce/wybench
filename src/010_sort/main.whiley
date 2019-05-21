@@ -80,9 +80,6 @@ method lookFor(sortedList list, int item):
 int[] searchTerms = [1,2,3,4,5,6,7,8,9]
 
 method main(ascii::string[] args):
-    if |args| == 0:
-        io::println("usage: sort <file>")
-    else:
         // first, read data
         filesystem::File file = filesystem::open(args[0],filesystem::READONLY)
         ascii::string input = ascii::from_bytes(file.read_all())
