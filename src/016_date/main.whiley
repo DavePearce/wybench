@@ -57,11 +57,9 @@ function next(Date date) -> Date:
     // second, calculate date of next day
     if date.day == last:
         date.day = 1
+        date.month = date.month + 1
         if date.month == DEC:
-            date.year = date.year + 1
             date.month = JAN
-        else:
-            date.month = date.month + 1
     else:
         date.day = date.day + 1
     // done
